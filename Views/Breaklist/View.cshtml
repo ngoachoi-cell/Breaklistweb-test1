@@ -1,0 +1,644 @@
+﻿@model BreaklistWeb.Models.BreaklistState
+@{
+    ViewData["Title"] = "Breaklist";
+    string today = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+    int dayStart = Model.DayStartMin;
+    int totalMinutes = Model.WindowMinutes;
+    int step = Model.SlotStepMin;
+    int slots = totalMinutes / step;
+    int slotsPerHour = 60 / step;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        :root {
+            --w-n: 190px; /* Name */
+            --w-t: 80px; /* Start/End */
+            --w-b: 32px; /* Delete/Drag */
+            --w-m: 120px; /* Messages */
+            --w-c: 48px; /* Slot cell */
+            --h-c: 28px; /* Cell height */
+            --h-h: 32px; /* Header height */
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background: #f9f9f9;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 12px 16px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .top-bar {
+            padding: 12px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn {
+            font-size: 16px;
+            padding: 8px 12px;
+            background: #2196F3;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .btn.green {
+                background: #4CAF50;
+            }
+
+            .btn.orange {
+                background: #FF9800;
+            }
+
+        .grid-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-grid {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            position: relative;
+        }
+
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: max-content;
+            min-width: 100%;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0;
+            height: var(--h-c);
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+            th.stickyTop {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                background: #f6a100;
+                color: #000;
+                font-weight: 700;
+                height: var(--h-h);
+            }
+
+            td.stickyLeft,
+            th.stickyLeft {
+                position: sticky;
+                left: 0;
+                z-index: 4;
+                background: #fff;
+            }
+
+            td.stickyLeft2,
+            th.stickyLeft2 {
+                position: sticky;
+                left: var(--w-n);
+                z-index: 4;
+                background: #fff;
+            }
+
+            td.stickyLeft3,
+            th.stickyLeft3 {
+                position: sticky;
+                left: calc(var(--w-n) + var(--w-t));
+                z-index: 4;
+                background: #fff;
+            }
+
+            td.stickyLeft4,
+            th.stickyLeft4 {
+                position: sticky;
+                left: calc(var(--w-n) + var(--w-t) + var(--w-t));
+                z-index: 4;
+                background: #fff;
+            }
+
+            td.stickyLeft5,
+            th.stickyLeft5 {
+                position: sticky;
+                left: calc(var(--w-n) + var(--w-t)*2 + var(--w-b));
+                z-index: 4;
+                background: #fff;
+            }
+
+            td.stickyLeft6,
+            th.stickyLeft6 {
+                position: sticky;
+                left: calc(var(--w-n) + var(--w-t)*2 + var(--w-b)*2);
+                z-index: 4;
+                background: #fff;
+            }
+
+        .nameCell {
+            width: var(--w-n);
+            padding-left: 8px;
+            font-weight: 700;
+            cursor: grab;
+        }
+
+        .timeCell {
+            width: var(--w-t);
+        }
+
+        .btnCell {
+            width: var(--w-b);
+        }
+
+        .msgCell {
+            width: var(--w-m);
+            padding: 0 4px;
+        }
+
+        input, button {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            padding: 0 4px;
+            background: transparent;
+            font-size: 16px;
+            text-align: center;
+        }
+
+            input.nameInput {
+                text-align: left;
+                font-weight: 700;
+            }
+
+            input.msgInput {
+                text-align: left;
+            }
+
+        td.slotCell {
+            width: var(--w-c);
+        }
+
+        td.working {
+            background: #fff;
+        }
+
+        td.notworking {
+            background: #000;
+            color: #fff;
+        }
+
+        td.breakMark {
+            background: #1e66ff !important;
+        }
+
+            td.breakMark input {
+                color: #fff;
+                font-weight: 700;
+            }
+
+        button.smallBtn {
+            height: 12px;
+            border: 1px solid #999;
+            background: #eee;
+            font-size: 14px;
+            padding: 0;
+            margin: 1px 0;
+        }
+
+        tr.dragOver {
+            outline: 2px dashed #f6a100;
+            background: #fff9c4;
+        }
+
+        .drag-handle {
+            cursor: move;
+            user-select: none;
+            font-weight: bold;
+        }
+
+        input:focus {
+            outline: 2px solid #1976d2;
+            outline-offset: -1px;
+        }
+
+        /* Scrollbar */
+        .scrollbar {
+            position: absolute;
+            height: 12px;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            background: transparent;
+            z-index: 2;
+        }
+
+            .scrollbar::-webkit-scrollbar {
+                height: 12px;
+            }
+
+            .scrollbar::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            .scrollbar::-webkit-scrollbar-thumb {
+                background: #c1c1c1;
+                border-radius: 6px;
+            }
+
+                .scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #a8a8a8;
+                }
+
+        .dummy {
+            height: 1px;
+            width: calc( var(--w-n) + var(--w-t) * 2 + var(--w-b) * 2 + var(--w-m) + (@slots * var(--w-c)) );
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">Breaklist – @today</div>
+
+    <div class="top-bar">
+        <div>File: <b>@Model.SourceFileName</b></div>
+        <a href="/Breaklist/Upload" class="btn">Upload another</a>
+        <form asp-action="AddRow" method="post" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn">+ Add Staff</button>
+        </form>
+        <form asp-action="SortByStartTime" method="post" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn orange">Sort by Start Time</button>
+        </form>
+    </div>
+
+    <form id="antiForm" method="post">@Html.AntiForgeryToken()</form>
+
+    <div class="grid-container" id="gridContainer">
+        <div class="main-grid" id="mainGrid">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="stickyTop stickyLeft">Name</th>
+                        <th class="stickyTop stickyLeft2">Start</th>
+                        <th class="stickyTop stickyLeft3">End</th>
+                        <th class="stickyTop stickyLeft4">Del</th>
+                        <th class="stickyTop stickyLeft5">☰</th>
+                        <th class="stickyTop stickyLeft6">Messages</th>
+
+                        @for (int h = 0; h < 25; h++)
+                        {
+                            int hour = (6 + h) % 24;
+                            <th class="stickyTop" colspan="3">
+                                <div style="font-size:10px;line-height:1.2;">
+                                    @hour.ToString("00"):00–15<br />
+                                    20–35<br />
+                                    40–55
+                                </div>
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int r = 0; r < Model.Rows.Count; r++)
+                    {
+                        var row = Model.Rows[r];
+                        string msgKey = $"msg:{row.Id}";
+                        Model.Cells.TryGetValue(msgKey, out var msgVal);
+                        msgVal ??= "";
+
+                        <tr class="staffRow" draggable="true" data-rowid="@row.Id">
+                            <td class="stickyLeft nameCell">
+                                <input class="nameInput" value="@row.Name" data-rowid="@row.Id" />
+                            </td>
+
+                            <td class="stickyLeft2 timeCell">
+                                <input class="timeInput startInput" type="time"
+                                       value="@BreaklistWeb.Models.BreaklistState.ToHHmm(row.StartAbsMin)"
+                                       data-rowid="@row.Id" />
+                            </td>
+
+                            <td class="stickyLeft3 timeCell">
+                                <input class="timeInput endInput" type="time"
+                                       value="@BreaklistWeb.Models.BreaklistState.ToHHmm(row.EndAbsMin)"
+                                       data-rowid="@row.Id" />
+                            </td>
+
+                            <td class="stickyLeft4 btnCell">
+                                <form asp-action="DeleteRow" method="post" style="margin:0;">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="rowId" value="@row.Id" />
+                                    <button class="smallBtn" type="submit">✕</button>
+                                </form>
+                            </td>
+
+                            <td class="stickyLeft5 btnCell drag-handle">☰</td>
+
+                            <td class="stickyLeft6 msgCell">
+                                <input class="msgInput"
+                                       maxlength="100"
+                                       value="@msgVal"
+                                       data-rowid="@row.Id"
+                                       data-type="message" />
+                            </td>
+
+                            @for (int s = 0; s < slots; s++)
+                            {
+                                int slotAbs = dayStart + (s * step);
+                                bool working = slotAbs >= row.StartAbsMin && slotAbs < row.EndAbsMin;
+
+                                var key = $"{row.Id}:{s}";
+                                Model.Cells.TryGetValue(key, out var cellVal);
+                                cellVal ??= "";
+
+                                bool isBreak = cellVal.Length == 2 && cellVal.All(char.IsDigit);
+
+                                <td class="slotCell @(working ? "working" : "notworking") @(isBreak ? "breakMark" : "")"
+                                    data-rowid="@row.Id"
+                                    data-slot="@s">
+                                    <input class="cellInput"
+                                           maxlength="6"
+                                           value="@cellVal"
+                                           data-rowid="@row.Id"
+                                           data-slot="@s" />
+                                </td>
+                            }
+                        </tr>
+
+                        <!-- ✅ Insert orange header after row 20 -->
+                        @if (r == 19)
+                        {
+                            <tr class="orange-header" style="position: sticky; top: 0; z-index: 5; background: #f6a100; color: #000; font-weight: 700; height: var(--h-h);">
+                                <th class="stickyTop stickyLeft">Name</th>
+                                <th class="stickyTop stickyLeft2">Start</th>
+                                <th class="stickyTop stickyLeft3">End</th>
+                                <th class="stickyTop stickyLeft4">Del</th>
+                                <th class="stickyTop stickyLeft5">☰</th>
+                                <th class="stickyTop stickyLeft6">Messages</th>
+
+                                @for (int h = 0; h < 25; h++)
+                                {
+                                    int hour = (6 + h) % 24;
+                                    <th class="stickyTop" colspan="3">
+                                        <div style="font-size:10px;line-height:1.2;">
+                                            @hour.ToString("00"):00–15<br />
+                                            20–35<br />
+                                            40–55
+                                        </div>
+                                    </th>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Top scrollbar -->
+        <div class="scrollbar" id="topScrollbar" style="top: 32px;">
+            <div class="dummy"></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            function token() {
+                const el = document.querySelector('#antiForm input[name="__RequestVerificationToken"]');
+                return el ? el.value : '';
+            }
+
+            async function post(url, data) {
+                const body = new URLSearchParams(data);
+                body.set('__RequestVerificationToken', token());
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body
+                });
+                return res;
+            }
+
+            // Save message
+            document.querySelectorAll('input.msgInput').forEach(inp => {
+                inp.addEventListener('blur', async () => {
+                    const rowId = inp.dataset.rowid;
+                    const key = `msg:${rowId}`;
+                    const value = (inp.value || '').trim();
+                    await post('/Breaklist/UpdateCell', {
+                        rowId: key,
+                        slot: 0,
+                        value: value
+                    });
+                });
+            });
+
+            // Save cell
+            document.querySelectorAll('input.cellInput').forEach(inp => {
+                inp.addEventListener('blur', async () => {
+                    await post('/Breaklist/UpdateCell', {
+                        rowId: inp.dataset.rowid,
+                        slot: inp.dataset.slot,
+                        value: inp.value || ''
+                    });
+                    const td = inp.closest('td');
+                    if (td) {
+                        const v = (inp.value || '').trim();
+                        const isBreak = /^\d{2}$/.test(v);
+                        td.classList.toggle('breakMark', isBreak);
+                    }
+                });
+            });
+
+            async function saveRow(rowId) {
+                const tr = document.querySelector(`tr[data-rowid="${rowId}"]`);
+                if (!tr) return;
+
+                const name = tr.querySelector('input.nameInput')?.value || '';
+                const start = tr.querySelector('input.startInput')?.value || '';
+                const end = tr.querySelector('input.endInput')?.value || '';
+
+                await post('/Breaklist/UpdateRow', { rowId, name, start, end });
+                location.reload();
+            }
+
+            document.querySelectorAll('input.nameInput').forEach(inp => {
+                inp.addEventListener('blur', () => saveRow(inp.dataset.rowid));
+            });
+            document.querySelectorAll('input.startInput, input.endInput').forEach(inp => {
+                inp.addEventListener('change', () => saveRow(inp.dataset.rowid));
+            });
+
+            // Drag & Drop
+            let dragSrc = null;
+            document.querySelectorAll('tr.staffRow').forEach(tr => {
+                tr.addEventListener('dragstart', e => {
+                    dragSrc = tr;
+                    e.dataTransfer.effectAllowed = 'move';
+                    tr.style.opacity = '0.6';
+                });
+
+                tr.addEventListener('dragend', () => {
+                    tr.style.opacity = '1';
+                });
+
+                tr.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    tr.classList.add('dragOver');
+                });
+
+                tr.addEventListener('dragleave', () => {
+                    tr.classList.remove('dragOver');
+                });
+
+                tr.addEventListener('drop', async e => {
+                    e.preventDefault();
+                    tr.classList.remove('dragOver');
+                    if (!dragSrc || dragSrc === tr) return;
+
+                    const tbody = tr.parentElement;
+                    const rows = Array.from(tbody.querySelectorAll('tr.staffRow'));
+                    const fromIndex = rows.indexOf(dragSrc);
+                    const toIndex = rows.indexOf(tr);
+
+                    if (fromIndex < toIndex) {
+                        tbody.insertBefore(dragSrc, tr.nextSibling);
+                    } else {
+                        tbody.insertBefore(dragSrc, tr);
+                    }
+
+                    const orderedIds = Array.from(tbody.querySelectorAll('tr.staffRow'))
+                        .map(row => row.dataset.rowid)
+                        .join(',');
+
+                    await post('/Breaklist/Reorder', { orderedIds });
+                });
+            });
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', (e) => {
+                const active = document.activeElement;
+                if (!active || !active.classList.contains('cellInput')) return;
+
+                const td = active.closest('td');
+                const rowId = td.dataset.rowid;
+                const slot = parseInt(td.dataset.slot);
+                const allRows = Array.from(document.querySelectorAll('tr.staffRow'));
+                const rowIndex = allRows.findIndex(tr => tr.dataset.rowid === rowId);
+                const totalSlots = @slots;
+
+                let targetRowId = rowId;
+                let targetSlot = slot;
+
+                switch (e.key) {
+                    case 'ArrowUp':
+                        if (rowIndex > 0) targetRowId = allRows[rowIndex - 1].dataset.rowid;
+                        else return;
+                        break;
+                    case 'ArrowDown':
+                        if (rowIndex < allRows.length - 1) targetRowId = allRows[rowIndex + 1].dataset.rowid;
+                        else return;
+                        break;
+                    case 'ArrowLeft':
+                        if (slot > 0) targetSlot = slot - 1;
+                        else return;
+                        break;
+                    case 'ArrowRight':
+                        if (slot < totalSlots - 1) targetSlot = slot + 1;
+                        else return;
+                        break;
+                    default:
+                        return;
+                }
+
+                e.preventDefault();
+
+                const nextInput = document.querySelector(
+                    `input.cellInput[data-rowid="${targetRowId}"][data-slot="${targetSlot}"]`
+                );
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            });
+
+            // ✅ Create and sync scrollbars
+            document.addEventListener('DOMContentLoaded', () => {
+                const gridContainer = document.getElementById('gridContainer');
+                const mainGrid = document.getElementById('mainGrid');
+                const topScrollbar = document.getElementById('topScrollbar');
+
+                // Calculate row height
+                const rowHeight = 28;
+                const headerHeight = 32;
+                const rowsPerSection = 25;
+
+                // Remove any existing dynamic scrollbars
+                document.querySelectorAll('.dynamic-scrollbar').forEach(el => el.remove());
+
+                // Add scrollbars every 25 rows
+                const totalRows = @Model.Rows.Count;
+                for (let i = 1; i <= Math.ceil(totalRows / rowsPerSection); i++) {
+                    const rowIndex = i * rowsPerSection;
+                    if (rowIndex > totalRows) break;
+
+                    const scrollbar = document.createElement('div');
+                    scrollbar.className = 'scrollbar dynamic-scrollbar';
+                    scrollbar.innerHTML = '<div class="dummy"></div>';
+
+                    // Position: below the header + (rowIndex * rowHeight)
+                    const topPos = headerHeight + (rowIndex * rowHeight);
+                    scrollbar.style.top = topPos + 'px';
+
+                    gridContainer.appendChild(scrollbar);
+                }
+
+                // Collect all scrollbars
+                const allScrollbars = [topScrollbar, ...document.querySelectorAll('.dynamic-scrollbar')];
+
+                // Sync function
+                function syncScroll(source) {
+                    const scrollLeft = source.scrollLeft || mainGrid.scrollLeft;
+                    allScrollbars.forEach(sb => {
+                        if (sb !== source) sb.scrollLeft = scrollLeft;
+                    });
+                    mainGrid.scrollLeft = scrollLeft;
+                }
+
+                // Attach listeners
+                [mainGrid, ...allScrollbars].forEach(el => {
+                    el.addEventListener('scroll', (e) => {
+                        syncScroll(e.target);
+                    });
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

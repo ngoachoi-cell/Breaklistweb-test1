@@ -1,0 +1,363 @@
+{
+  "DayStartMin": 360,
+  "WindowMinutes": 1500,
+  "SlotStepMin": 20,
+  "SourceFileName": "",
+  "UploadedAt": "2026-01-12T21:33:49.581535Z",
+  "Rows": [
+    {
+      "Id": "cd051b2f813d462e8ebae0c33b1732d4",
+      "SortOrder": 0,
+      "Name": "Yau, Ann Y",
+      "StartAbsMin": 360,
+      "EndAbsMin": 840
+    },
+    {
+      "Id": "d802bd4f26a3445f8ceba2910074267c",
+      "SortOrder": 1,
+      "Name": "Beresford, Katherine",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "121f4ccaa7744935b7db7074788d51e9",
+      "SortOrder": 2,
+      "Name": "Brehaita, Doris",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "d105aeb7effd4fa69d909eafe3039440",
+      "SortOrder": 3,
+      "Name": "Davoodi, Zabi",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "aeb03816aa204c77adf60cf94eab08eb",
+      "SortOrder": 4,
+      "Name": "Didenco, Alexandra",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "2e04171728574b98a1d002ce11fbdb3b",
+      "SortOrder": 5,
+      "Name": "Dumitru, Ianis-Albert",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "9632539d218046769e3b0d059f43189c",
+      "SortOrder": 6,
+      "Name": "Farnham, Jack",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "6b02ed52840b49238d8dda4b9abeb49d",
+      "SortOrder": 7,
+      "Name": "Ganea, Alesia",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "ae7f6258f4bc4adb9abce3d070f3d199",
+      "SortOrder": 8,
+      "Name": "Hall, Devantay",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "d5cd230cb0734a7293c02696e54b3e75",
+      "SortOrder": 9,
+      "Name": "Jusakova, Viktorija",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "04da7e5a963f443182f92f39ac9f7ad6",
+      "SortOrder": 10,
+      "Name": "Kabeya, Glenn",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "35b7f393a5d44e25a92321ff8be9bbe0",
+      "SortOrder": 11,
+      "Name": "Kasatkin, Maxim",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "1b907708b35549fb91591dafb4d19904",
+      "SortOrder": 12,
+      "Name": "Kirkusu, Aydin",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "5e0e48db474c4829b53896af1542cb54",
+      "SortOrder": 13,
+      "Name": "Mok, Vince S",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "7322816df92b4e4f81b0e642cf9d7777",
+      "SortOrder": 14,
+      "Name": "Patrascu, Steluta I",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "2620bc1c445f47728dfd51644039f279",
+      "SortOrder": 15,
+      "Name": "Saleem, Amgad",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "d00f2d2eb37c4893abc83c620c6c682e",
+      "SortOrder": 16,
+      "Name": "Salek, Joanna L",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "e21d52704b904d70a4f1c8f6c84ed7c3",
+      "SortOrder": 17,
+      "Name": "Saveiko, Taras",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "11444deded044769950d7d223e2e57e5",
+      "SortOrder": 18,
+      "Name": "Stan, Iulia-Marinela",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "23d7fe4992db43b48e5ec278a5e0fc20",
+      "SortOrder": 19,
+      "Name": "Stankeviciene, Ieva",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "f274160014404022a5fdf9508de1a050",
+      "SortOrder": 20,
+      "Name": "Sykes, Shaun",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "568ce93020f14054a9bf6a15b9ec0570",
+      "SortOrder": 21,
+      "Name": "Thalongsak, Malavane",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "02097812f0994269880ca2c4d6a551bf",
+      "SortOrder": 22,
+      "Name": "Tobe, Emiri",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "8d99eb3fe0d84adcb0fd297c8d23ae70",
+      "SortOrder": 23,
+      "Name": "Tornea, Alexandru",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "c2e81239cc944993896c8ca307b5553b",
+      "SortOrder": 24,
+      "Name": "Webb, Tamara",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "a4ca086b416543359190959ef265c435",
+      "SortOrder": 25,
+      "Name": "Whales, Nathan",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "86151a05666247f89f0186dd6cd5202b",
+      "SortOrder": 26,
+      "Name": "Woolger, Marlee",
+      "StartAbsMin": 390,
+      "EndAbsMin": 870
+    },
+    {
+      "Id": "81d3fe467ab94d648a58cda543a67788",
+      "SortOrder": 27,
+      "Name": "Ciara, Izabela M",
+      "StartAbsMin": 1170,
+      "EndAbsMin": 1650
+    },
+    {
+      "Id": "b4d8b24975064c7396f3acbe2b33fbb7",
+      "SortOrder": 28,
+      "Name": "Martins, Carlos M",
+      "StartAbsMin": 1170,
+      "EndAbsMin": 1650
+    },
+    {
+      "Id": "e0b8501e3b224a4facbd3f9c37a504b6",
+      "SortOrder": 29,
+      "Name": "Dalta, Dragos",
+      "StartAbsMin": 1200,
+      "EndAbsMin": 1680
+    },
+    {
+      "Id": "f14bf17ecf824c27b930a63c79e530a9",
+      "SortOrder": 30,
+      "Name": "Dzioch, Marta",
+      "StartAbsMin": 1200,
+      "EndAbsMin": 1680
+    },
+    {
+      "Id": "3f55566b09d94e068b03d211a35b35ee",
+      "SortOrder": 31,
+      "Name": "Fitzpatrick, Lola E",
+      "StartAbsMin": 1200,
+      "EndAbsMin": 1680
+    },
+    {
+      "Id": "71e2ac990a9a40439d729411279df456",
+      "SortOrder": 32,
+      "Name": "Jakovickis, Arturs",
+      "StartAbsMin": 1200,
+      "EndAbsMin": 1680
+    },
+    {
+      "Id": "6525bbbdb3f5452c82ecb96a745566b9",
+      "SortOrder": 33,
+      "Name": "Lee, Minhee",
+      "StartAbsMin": 1200,
+      "EndAbsMin": 1680
+    },
+    {
+      "Id": "c77656b7897b41d7b03c4f93b897e479",
+      "SortOrder": 34,
+      "Name": "Wozniak, Joanna",
+      "StartAbsMin": 1200,
+      "EndAbsMin": 1680
+    },
+    {
+      "Id": "4ab9209ec83f4f89aca7b1616a2e99fd",
+      "SortOrder": 35,
+      "Name": "Baxter, Grace M",
+      "StartAbsMin": 1320,
+      "EndAbsMin": 1800
+    },
+    {
+      "Id": "63eee06d7da0495dbe1e22d0c6a5c0b3",
+      "SortOrder": 36,
+      "Name": "Chawner, Amber",
+      "StartAbsMin": 1320,
+      "EndAbsMin": 1800
+    },
+    {
+      "Id": "cbe74a91b1d14923bbcee07f13b7232d",
+      "SortOrder": 37,
+      "Name": "Holland, Jordan",
+      "StartAbsMin": 1320,
+      "EndAbsMin": 1800
+    },
+    {
+      "Id": "8988fecb076d4307836891470a31b3a9",
+      "SortOrder": 38,
+      "Name": "D\u0027Ippolito, Lorenzo",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "1db1d91dbb5a448c9f67559fafb8e5ad",
+      "SortOrder": 39,
+      "Name": "Dankova, Barbora",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "d92e9478803f4e83baf3cd9409bd03f5",
+      "SortOrder": 40,
+      "Name": "Esposito, Mirko",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "486727f4d50c49cd899ef0066b25085c",
+      "SortOrder": 41,
+      "Name": "Fratello Bertolotti, Manuel",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "8a716c9fbcac4044af3fae75f0d316c8",
+      "SortOrder": 42,
+      "Name": "Green, Nicholas",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "68f7f8f3abd247bbb78258029ad22c07",
+      "SortOrder": 43,
+      "Name": "Homans, Lisa J",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "246c5b1c5dea4ebfa60208a50118ab54",
+      "SortOrder": 44,
+      "Name": "Lewis, Jonathan R",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "5a43b5fdfd674aa4b5e3b7ca690b3e26",
+      "SortOrder": 45,
+      "Name": "Nikolova, Borislava",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "80f7054bc1164aed8b0b638dd76bef0f",
+      "SortOrder": 46,
+      "Name": "Osborne, Gavin",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "5ed775af215f477fa27264ecc90f429f",
+      "SortOrder": 47,
+      "Name": "Richardson, Shaun",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "09b42935a1154be1a8b85b7dab6ee54c",
+      "SortOrder": 48,
+      "Name": "Rus, Ioana P",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    },
+    {
+      "Id": "dd760ceded024ec2beb8b98019a45a82",
+      "SortOrder": 49,
+      "Name": "Salmins, Clement B",
+      "StartAbsMin": 1350,
+      "EndAbsMin": 1830
+    }
+  ],
+  "Cells": {
+    "cd051b2f813d462e8ebae0c33b1732d4:2": "a2",
+    "568ce93020f14054a9bf6a15b9ec0570:5": "a2"
+  }
+}

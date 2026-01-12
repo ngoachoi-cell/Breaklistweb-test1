@@ -1,0 +1,86 @@
+﻿@model BreaklistWeb.Models.BreaklistState
+@{
+    ViewData["Title"] = "Upload Breaklist Report";
+    var err = (string?)ViewBag.LastError;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Breaklist" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 12px;
+            background: #f9f9f9;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin: 12px 0;
+        }
+
+        input[type="file"], button {
+            font-size: 16px;
+            padding: 10px 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+            margin-top: 8px;
+        }
+
+            button:hover {
+                background: #f0f0f0;
+            }
+
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .success {
+            color: #2e7d32;
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Upload Breaklist Report</h2>
+
+    @if (!string.IsNullOrWhiteSpace(err))
+    {
+        <div class="error">@err</div>
+    }
+
+    <form asp-action="Upload" asp-controller="Breaklist" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <input type="file" name="file" accept=".xlsx,.xls" />
+        <br />
+        <button type="submit">Upload & Add Staff</button>
+    </form>
+
+    @if (Model.Rows.Count > 0)
+    {
+        <div class="success">
+            ✅ <b>@Model.Rows.Count</b> staff loaded.<br />
+            Upload another file to <b>add more staff</b>.
+        </div>
+        <a asp-action="ViewBreaklist" style="display:inline-block; margin:10px 0;">→ View breaklist</a>
+
+        <form asp-action="ClearAll" method="post" style="margin-top:10px;" onsubmit="return confirm('Clear all staff and breaks?')">
+            @Html.AntiForgeryToken()
+            <button type="submit" style="font-size:14px; background:#d32f2f; color:white;">Clear All Staff</button>
+        </form>
+    }
+
+</body>
+</html>

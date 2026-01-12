@@ -1,0 +1,16 @@
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\BreaklistWeb.exe
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\App_Data\breaklist.json
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\BreaklistWeb.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\BreaklistWeb.deps.json
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\BreaklistWeb.runtimeconfig.json
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\BreaklistWeb.pdb
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\EPPlus.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\EPPlus.Interfaces.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.Pkcs.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.Xml.dll
+C:\Users\ngo_a\Desktop\BreaklistWeb\BreaklistWeb\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
